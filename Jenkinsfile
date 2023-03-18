@@ -1,13 +1,13 @@
-pipeline {
+pipeline{
     agent any
-    stages {
-        stage('Copy files to remote server') {
-            steps {
-                sshagent(['mywebapp.pem']) {
-                    sh 'scp -r ${WORKSPACE}/* ec2-user@ec2-3-83-37-130.compute-1.amazonaws.com:/var/www/html/ahmadweb/'
-                }
+    environment{
+        staging_server="3.83.37.130"
+    }
+    stages{
+        stage('Deploy to Remote'){
+            steps{
+                sh 'scp -r ${WORKSPACE}/* root@${staging_server}:/var/www/html/ahmadweb$/'
             }
         }
     }
 }
-
