@@ -6,7 +6,7 @@ pipeline{
     stages{
         stage('Deploy to Remote'){
             steps{
-                sh 'scp -r -o StrictHostKeyChecking=no ${WORKSPACE}/* ec2-user@ec2-3-83-37-130.compute-1.amazonaws.com:/var/www/html/ahmadweb$/'
+                sh 'scp -r -i /home/ec2-user/mywebapp.pem -o StrictHostKeyChecking=no ${WORKSPACE}/* ec2-user@ec2-3-83-37-130.compute-1.amazonaws.com:/var/www/html/ahmadweb$/'
             }
         }
     }
