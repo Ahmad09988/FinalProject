@@ -1,13 +1,16 @@
-pipeline{
+pipeline {
     agent any
-    environment{
-        staging_server="3.83.37.130"
-    }
-    stages{
-        stage('Deploy to Remote'){
-            steps{
-                sh 'scp -r ${WORKSPACE}/* ec2-user@${staging_server}:/var/www/html/ahmadweb/'
+    stages {
+        stage('Copy files to remote server') {
+            steps {
+                sshagent(['mywebapp.pem']) {
+                    sh 'scp -r /var/lib/jenkins/workspace/mywebapp/* ec2-user@3.83.37.130:/tmp/'
+                }
+                sshagent(['mywebapp.pem']) {
+                    sh 'ssh ec2-user@3.83.37.130 sudo cp -r /tmp/* /var/www/html/ahmadweb/'
+                }
             }
         }
     }
 }
+
