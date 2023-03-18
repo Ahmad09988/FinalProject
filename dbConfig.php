@@ -1,6 +1,6 @@
 <?php
 // Database configuration
-$dbHost     = "localhost";
+$dbHost     = "ahmaddb.c1p9kjmg9mgh.us-east-1.rds.amazonaws.com";
 $dbUsername = "root";
 $dbPassword = "ahmad12345";
 $dbName     = "ahmaddb";
